@@ -56,7 +56,7 @@ uploader = "wikiteam3.uploader:main"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-requests = "^2.32.0"
+requests = "^2.33.0"
 internetarchive = "^5.5.1"
 lxml = "^6.0.2"
 mwclient = "^0.10.1"
@@ -74,7 +74,7 @@ profile = "black"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^6.2.5"
-requests = "^2.32.0"
+requests = "^2.33.0"
 flake8 = "^3.9.2"
 pre-commit = "^2.17.0"
 pymarkdown = "^0.1.4"
