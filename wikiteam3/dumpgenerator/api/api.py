@@ -12,7 +12,7 @@ from .get_json import getJSON
 
 def checkAPI(api: str, session: Optional[requests.Session]):
     """Checking API availability"""
-    global cj
+    # global cj
     # handle redirects
     r: Optional[requests.Response] = None
     for i in range(4):

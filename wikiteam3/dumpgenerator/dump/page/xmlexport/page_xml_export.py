@@ -3,6 +3,7 @@ import sys
 import time
 
 import requests
+from typing import Dict
 
 from wikiteam3.dumpgenerator.api import handleStatusCode
 from wikiteam3.dumpgenerator.config import Config
