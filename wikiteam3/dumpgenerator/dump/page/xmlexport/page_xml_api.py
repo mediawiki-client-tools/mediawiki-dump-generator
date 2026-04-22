@@ -18,7 +18,7 @@ except ImportError:
 import xml.dom.minidom as MD
 
 
-def reconstructRevisions(root: ET.Element[str]):
+def reconstructRevisions(root: ET.Element):
     # print ET.tostring(rev)
     page = ET.Element("stub")
     edits = 0
