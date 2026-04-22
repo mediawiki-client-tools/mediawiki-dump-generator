@@ -20,6 +20,7 @@ config = {
 """
 
 import dataclasses
+from dataclasses import field
 import json
 import sys
 from typing import List
@@ -56,8 +57,8 @@ class Config:
     xmlrevisions: bool = False
     xmlrevisions_page: bool = False
     images: bool = False
-    namespaces: List[int] = []
-    exnamespaces: List[int] = []
+    namespaces: List[int] = field(default_factory=List[int])
+    exnamespaces: List[int] = field(default_factory=List[int])
 
     api_chunksize: int = 0  # arvlimit, ailimit, etc
     export: str = ""  # Special:Export page name
