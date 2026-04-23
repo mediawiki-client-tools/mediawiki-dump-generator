@@ -26,10 +26,10 @@ def _new_config_from_parameter(params):
 
 def get_config(mediawiki_ver, api=True):
     assert api == True
-    if mediawiki_ver == "1.39.7":
+    if mediawiki_ver == "1.45.1":
         return _new_config_from_parameter(
             [
                 "--api",
-                "http://group0.mediawiki.demo.save-web.org/mediawiki-1.16.5/api.php",
+                "https://publictestwiki.com/api.php",
             ]
         )
