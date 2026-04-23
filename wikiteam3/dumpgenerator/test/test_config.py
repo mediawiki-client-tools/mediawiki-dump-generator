@@ -30,6 +30,6 @@ def get_config(mediawiki_ver, api=True):
         return _new_config_from_parameter(
             [
                 "--api",
-                "https://testw.fandom.com/api.php",
+                "http://group0.mediawiki.demo.save-web.org/mediawiki-1.16.5/api.php",
             ]
         )
