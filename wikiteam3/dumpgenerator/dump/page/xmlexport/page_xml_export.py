@@ -3,7 +3,7 @@ import sys
 import time
 
 import requests
-from typing import Dict
+from typing import Dict, Optional
 
 from wikiteam3.dumpgenerator.api import handleStatusCode
 from wikiteam3.dumpgenerator.config import Config
@@ -13,7 +13,7 @@ from wikiteam3.utils import uprint
 
 
 def getXMLPageCore(
-    headers: Dict, params: Dict, config: Config, session: requests.Session
+    headers: Optional[Dict], params: Dict, config: Config, session: requests.Session
 ) -> str:
     """"""
     # returns a XML containing params['limit'] revisions (or current only), ending in </mediawiki>
@@ -98,14 +98,14 @@ def getXMLPageWithExport(
     title_ = title
     title_ = re.sub(" ", "_", title_)
     # do not convert & into %26, title_ = re.sub('&', '%26', title_)
-    if config.export:
-        params = {"title": config.export, "pages": title_, "action": "submit"}
-    else:
-        params = {"title": "Special:Export", "pages": title_, "action": "submit"}
-    if config.curonly:
-        params["curonly"] = 1
-        params["limit"] = 1
-    else:
+    params = {
+        "title": config.export or "Special:Export",
+        "pages": title_,
+        "action": "submit",
+        "curonly": config.curonly,
+        "limit": config.curonly,
+    }
+    if not config.curonly:
         params["offset"] = "1"  # 1 always < 2000s
         # if server errors occurs while retrieving the full page history, it may return [oldest OK versions] + last version, excluding middle revisions, so it would be partialy truncated
         # http://www.mediawiki.org/wiki/Manual_talk:Parameters_to_Special:Export#Parameters_no_longer_in_use.3F

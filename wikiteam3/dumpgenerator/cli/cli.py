@@ -6,7 +6,7 @@ import os
 import queue
 import re
 import sys
-from typing import *
+from typing import Dict, Tuple
 
 import requests
 import urllib3

@@ -3,12 +3,17 @@ import json
 import requests
 
 from wikiteam3.dumpgenerator.test.test_config import get_config
+from wikiteam3.dumpgenerator.config import Config
+
+from contextlib import _GeneratorContextManager
+from typing import cast
 
 from .site_info import saveSiteInfo
 
 
 def test_mediawiki_version_match():
-    with get_config("1.45.1") as config:
+    config: Config = cast(Config, get_config("1.45.1"))
+    if config:
         sess = requests.Session()
         saveSiteInfo(config, sess)
         with open(f"{config.path}/siteinfo.json") as f:

@@ -25,7 +25,7 @@ def _new_config_from_parameter(params):
 
 
 def get_config(mediawiki_ver, api=True):
-    assert api == True
+    assert api
     if mediawiki_ver == "1.45.1":
         return _new_config_from_parameter(
             [
