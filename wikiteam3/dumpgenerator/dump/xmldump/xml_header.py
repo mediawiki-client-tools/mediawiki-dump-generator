@@ -14,7 +14,7 @@ from wikiteam3.dumpgenerator.log import logerror
 def getXMLHeader(config: Config, session: requests.Session) -> Tuple[str, Config]:
     """Retrieve a random page to extract XML headers (namespace info, etc)"""
     print(config.api)
-    xml = ""
+    xml: str = ""
     disableSpecialExport = config.xmlrevisions or config.xmlapiexport
     randomtitle = "Main_Page"
     if disableSpecialExport and config.api and config.api.endswith("api.php"):
@@ -25,7 +25,7 @@ def getXMLHeader(config: Config, session: requests.Session) -> Tuple[str, Config
                 f"{config.api}?action=query&export=1&exportnowrap=1&list=allpages&aplimit=1",
                 timeout=10,
             )
-            xml: str = r.text
+            xml = r.text
             # Otherwise try without exportnowrap, e.g. Wikia returns a blank page on 1.19
             if not re.match(r"\s*<mediawiki", xml):
                 r = session.get(

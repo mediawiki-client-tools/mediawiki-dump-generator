@@ -139,7 +139,7 @@ class DumpGenerator:
 
     @staticmethod
     def resumePreviousDump(config: Config, other: Dict):
-        images = []
+        images: list[str] = []
         print("Resuming previous dump process...")
         if config.xml:
             # checking xml dump

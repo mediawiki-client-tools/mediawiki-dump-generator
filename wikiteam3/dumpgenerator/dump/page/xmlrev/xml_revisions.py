@@ -349,7 +349,7 @@ def getXMLRevisions(
                 lastArvcontinue = lastPage.attrib["arvcontinue"]
             except Exception:
                 print(
-                    f"Failed to find title in last trunk XML: {lxml.etree.tostring(lastPage)}"
+                    f"Failed to find title in last trunk XML: {lxml.etree.tostring(lastPage)!r}"
                 )
                 raise
             nscontinue = lastNs
@@ -378,7 +378,7 @@ def getXMLRevisions(
                 start = lastPage.find("title")
             except Exception:
                 print(
-                    f"Failed to find title in last trunk XML: {lxml.etree.tostring(lastPage)}"
+                    f"Failed to find title in last trunk XML: {lxml.etree.tostring(lastPage)!r}"
                 )
                 raise
         else:

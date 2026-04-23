@@ -5,7 +5,6 @@ import requests
 from wikiteam3.dumpgenerator.test.test_config import get_config
 from wikiteam3.dumpgenerator.config import Config
 
-from contextlib import _GeneratorContextManager
 from typing import cast
 
 from .site_info import saveSiteInfo

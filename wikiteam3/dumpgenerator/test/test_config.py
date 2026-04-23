@@ -3,9 +3,9 @@ import tempfile
 from contextlib import contextmanager
 
 from wikiteam3.dumpgenerator.cli import getParameters
-from wikiteam3.dumpgenerator.config import newConfig
+from wikiteam3.dumpgenerator.config import newConfig, Config
 
-CONFIG_CACHE = {}
+CONFIG_CACHE: dict[tuple, Config] = {}
 
 
 @contextmanager

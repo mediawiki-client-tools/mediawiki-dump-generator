@@ -284,7 +284,7 @@ class Image:
                         "Error: listing %d images in a chunk is not possible, trying tiny chunks"
                         % (limit)
                     )
-                    limit = limit / 10
+                    limit = int(limit / 10)
                     continue
                 elif retries > 0:  # waste retries, then exit
                     retries -= 1
@@ -517,7 +517,7 @@ class Image:
         return images
 
     @staticmethod
-    def saveImageNames(config: Config, images: List[List], session: requests.Session):
+    def saveImageNames(config: Config, images: List[str], session: requests.Session):
         """Save image list in a file, including filename, url, uploader, size and sha1"""
 
         imagesfilename = "{}-{}-images.txt".format(

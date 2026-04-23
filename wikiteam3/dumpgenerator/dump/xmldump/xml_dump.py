@@ -74,7 +74,7 @@ def doXMLExportDump(
             start = lastPage.find("title").text
         except Exception:
             print(
-                f"Failed to find title in last trunk XML: {lxml.etree.tostring(lastPage)}"
+                f"Failed to find title in last trunk XML: {lxml.etree.tostring(lastPage)!r}"
             )
             raise
     else:
