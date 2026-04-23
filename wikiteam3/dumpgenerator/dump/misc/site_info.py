@@ -11,7 +11,7 @@ import requests
 def saveSiteInfo(config: Config, session: requests.Session):
     """Save a file with site info"""
 
-    if not config or (config and not config.api):
+    if not config or type(config) is not Config or (config and not config.api):
         return
     if os.path.exists(f"{config.path}/siteinfo.json"):
         print("siteinfo.json exists, do not overwrite")

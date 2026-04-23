@@ -1,6 +1,9 @@
 import copy
 import tempfile
-from contextlib import contextmanager
+
+# from contextlib import contextmanager
+from typing import Any, Optional
+from collections.abc import Generator
 
 from wikiteam3.dumpgenerator.cli import getParameters
 from wikiteam3.dumpgenerator.config import newConfig, Config
@@ -8,7 +11,7 @@ from wikiteam3.dumpgenerator.config import newConfig, Config
 CONFIG_CACHE: dict[tuple, Config] = {}
 
 
-@contextmanager
+# @contextmanager
 def _new_config_from_parameter(params):
     _params = tuple(params)
     if _params in CONFIG_CACHE:
@@ -24,7 +27,9 @@ def _new_config_from_parameter(params):
         pass
 
 
-def get_config(mediawiki_ver, api=True):
+def get_config(
+    mediawiki_ver, api=True
+) -> Optional[Generator[Config, Any, Config | None]]:
     assert api
     if mediawiki_ver == "1.45.1":
         return _new_config_from_parameter(
@@ -33,3 +38,5 @@ def get_config(mediawiki_ver, api=True):
                 "https://publictestwiki.com/api.php",
             ]
         )
+    else:
+        return None
