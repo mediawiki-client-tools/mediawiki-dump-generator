@@ -4,6 +4,7 @@ import sys
 from typing import *
 
 import requests
+import curl_cffi
 
 from wikiteam3.dumpgenerator.config import Config
 from wikiteam3.dumpgenerator.dump.page.xmlexport.page_xml import getXMLPage
@@ -20,17 +21,18 @@ def getXMLHeader(config: Config = None, session=None) -> Tuple[str, Config]:
     if disableSpecialExport and config.api and config.api.endswith("api.php"):
         try:
             print("Getting the XML header from the API")
-            # Export and exportnowrap exist from MediaWiki 1.15, allpages from 1.8
-            r = session.get(
+            r = curl_cffi.get(
                 f"{config.api}?action=query&export=1&exportnowrap=1&list=allpages&aplimit=1",
                 timeout=10,
+                impersonate="chrome"
             )
             xml: str = r.text
             # Otherwise try without exportnowrap, e.g. Wikia returns a blank page on 1.19
             if not re.match(r"\s*<mediawiki", xml):
-                r = session.get(
+                r = curl_cffi.get(
                     f"{config.api}?action=query&export=1&list=allpages&aplimit=1&format=json",
                     timeout=10,
+                    impersonate="chrome"
                 )
                 try:
                     xml = r.json()["query"]["export"]["*"]
@@ -38,16 +40,18 @@ def getXMLHeader(config: Config = None, session=None) -> Tuple[str, Config]:
                     pass
             if not re.match(r"\s*<mediawiki", xml):
                 # Do without a generator, use our usual trick of a random page title
-                r = session.get(
+                r = curl_cffi.get(
                     f"{config.api}?action=query&export=1&exportnowrap=1&titles={randomtitle}",
                     timeout=10,
+                    impersonate="chrome"
                 )
                 xml = str(r.text)
             # Again try without exportnowrap
             if not re.match(r"\s*<mediawiki", xml):
-                r = session.get(
+                r = curl_cffi.get(
                     f"{config.api}?action=query&export=1&format=json&titles={randomtitle}",
                     timeout=10,
+                    impersonate="chrome"
                 )
                 try:
                     xml = r.json()["query"]["export"]["*"]

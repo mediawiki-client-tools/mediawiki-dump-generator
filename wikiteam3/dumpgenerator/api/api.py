@@ -5,6 +5,7 @@ from urllib.parse import urljoin, urlparse, urlunparse
 
 import mwclient
 import requests
+import curl_cffi
 
 from wikiteam3.utils import getUserAgent
 
@@ -64,11 +65,16 @@ def mwGetAPIAndIndex(url="", session: requests.Session = None):
     if not session:
         session = requests.Session()  # Create a new session
         session.headers.update({"User-Agent": getUserAgent()})
-    r = session.post(url=url, timeout=120)
+
+    r = curl_cffi.post(
+        url=url,
+        impersonate="chrome",
+        timeout=120
+    )
     result = r.text
 
     if m := re.findall(
-        r'(?im)<\s*link\s*rel="EditURI"\s*type="application/rsd\+xml"\s*href="([^>]+?)\?action=rsd"\s*/\s*>',
+        r'(?im)<\s*link\s*rel=\"EditURI\"\s*type=\"application/rsd\+xml\"\s*href=\"([^>]+?)\?action=rsd\"\s*/?\s*>',
         result,
     ):
         api = m[0]

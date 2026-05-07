@@ -4,6 +4,7 @@ import time
 from typing import *
 
 import requests
+import curl_cffi
 
 from wikiteam3.dumpgenerator.api import handleStatusCode
 from wikiteam3.dumpgenerator.config import Config
@@ -73,8 +74,12 @@ def getXMLPageCore(
                 raise ExportAbortedError(config.index)
         # FIXME HANDLE HTTP Errors HERE
         try:
-            r = session.post(
-                url=config.index, params=params, headers=headers, timeout=10
+            r = curl_cffi.post(
+                url=config.index,
+                params=params,
+                headers=headers,
+                timeout=10,
+                impersonate="chrome"
             )
             handleStatusCode(r)
             xml = r.text

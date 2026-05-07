@@ -4,6 +4,7 @@ import traceback
 from typing import *
 
 import requests
+import curl_cffi
 
 from wikiteam3.dumpgenerator.api import handleStatusCode
 from wikiteam3.dumpgenerator.config import Config
@@ -135,7 +136,12 @@ def getXMLPageCoreWithApi(
             raise ExportAbortedError(config.index)
         # FIXME HANDLE HTTP Errors HERE
         try:
-            r = session.get(url=config.api, params=params, headers=headers)
+            r = curl_cffi.get(
+                url=config.api,
+                params=params,
+                headers=headers,
+                impersonate="chrome"
+            )
             handleStatusCode(r)
             xml = r.text
             # print xml

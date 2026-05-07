@@ -1,6 +1,7 @@
 import re
 
 import requests
+import curl_cffi
 
 from wikiteam3.utils import getUserAgent
 
@@ -11,9 +12,12 @@ def getWikiEngine(url="", session: requests.Session = None) -> str:
     if not session:
         session = requests.Session()  # Create a new session
         session.headers.update({"User-Agent": getUserAgent()})
-    r = session.post(url=url, timeout=30)
+
+    r = curl_cffi.post(url, impersonate="chrome")
+
     if r.status_code == 405 or not r.text:
         r = session.get(url=url, timeout=120)
+
     result = r.text
 
     wikiengine = "Unknown"
