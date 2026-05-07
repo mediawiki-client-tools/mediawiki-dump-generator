@@ -23,6 +23,9 @@ def reconstructRevisions(root: ET.Element):
     page = ET.Element("stub")
     edits = 0
     query = root.find("query")
+    pages: Optional[ET.Element] = None
+    page_find: Optional[ET.Element] = None
+    revisions: Optional[ET.Element] = None
     rev_findall: list[ET.Element] = list()
     if query:
         pages = query.find("pages")
@@ -204,6 +207,8 @@ def getXMLPageWithApi(
                 continue
             try:
                 query = root.find("query")
+                pages: Optional[ET.Element] = None
+                retpage: Optional[ET.Element] = None
                 if query:
                     pages = query.find("pages")
                 if pages:
