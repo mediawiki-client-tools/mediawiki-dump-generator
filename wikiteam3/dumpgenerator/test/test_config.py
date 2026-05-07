@@ -1,12 +1,12 @@
 import copy
 import tempfile
+from collections.abc import Generator
 
 # from contextlib import contextmanager
 from typing import Any, Optional
-from collections.abc import Generator
 
 from wikiteam3.dumpgenerator.cli import getParameters
-from wikiteam3.dumpgenerator.config import newConfig, Config
+from wikiteam3.dumpgenerator.config import Config, newConfig
 
 CONFIG_CACHE: dict[tuple, Config] = {}
 

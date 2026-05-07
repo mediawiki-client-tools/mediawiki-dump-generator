@@ -50,11 +50,10 @@ from tkinter import (
     messagebox,
     ttk,
 )
+from typing import Dict
 
 from wikiteam3.dumpgenerator.api.api import checkAPI
 from wikiteam3.dumpgenerator.api.index_check import checkIndex
-
-from typing import Dict
 
 # See https://www.mediawiki.org/wiki/Hosting_services
 wikifarms = {
@@ -436,7 +435,7 @@ class App:
                 self.msg(msg, level="ok")
                 # sys.stdout.write("%.1f MB of %.1f MB downloaded (%.2f%%)" %(downloaded, total_mb, percent))
                 # sys.stdout.flush()
-        except:
+        except Exception as e:
             pass
 
     def downloadDump(self, event=None):

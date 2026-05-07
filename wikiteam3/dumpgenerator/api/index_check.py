@@ -1,8 +1,7 @@
 import re
+from typing import Optional
 
 import requests
-
-from typing import Optional
 
 
 def checkIndex(index: str, cookies: str, session: Optional[requests.Session] = None):

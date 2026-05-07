@@ -1,13 +1,12 @@
 import sys
 import time
-from urllib.parse import urlparse
 from typing import List
-
-from mwclient.errors import InvalidResponse, MwClientError
+from urllib.parse import urlparse
 
 import lxml.etree
 import mwclient
 import requests
+from mwclient.errors import InvalidResponse, MwClientError
 
 from wikiteam3.dumpgenerator.api.page_titles import readTitles
 from wikiteam3.dumpgenerator.config import Config
@@ -137,7 +136,7 @@ def getXMLRevisionsByAllRevisions(
             # Repeat the arvrequest with new arvparams until done
             while True:
                 # Reset revision IDs from the previous batch from arv
-                revids = []
+                revids: List[str] = []
                 for page in arvrequest["query"]["allrevisions"]:
                     revids.extend(
                         str(revision["revid"]) for revision in page["revisions"]

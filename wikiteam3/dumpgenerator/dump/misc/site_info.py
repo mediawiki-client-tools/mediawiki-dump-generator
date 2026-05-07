@@ -1,11 +1,11 @@
 import json
 import os
 
+import requests
+
 from wikiteam3.dumpgenerator.api import getJSON
 from wikiteam3.dumpgenerator.cli import Delay
 from wikiteam3.dumpgenerator.config import Config
-
-import requests
 
 
 def saveSiteInfo(config: Config, session: requests.Session):

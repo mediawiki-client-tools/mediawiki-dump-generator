@@ -20,9 +20,9 @@ config = {
 """
 
 import dataclasses
-from dataclasses import field
 import json
 import sys
+from dataclasses import field
 from typing import List
 
 # import contextlib
@@ -59,8 +59,8 @@ class Config:
     xmlrevisions: bool = False
     xmlrevisions_page: bool = False
     images: bool = False
-    namespaces: List[int] = field(default_factory=List[int])
-    exnamespaces: List[int] = field(default_factory=List[int])
+    namespaces: List[int] = field(default_factory=list[int])
+    exnamespaces: List[int] = field(default_factory=list[int])
 
     api_chunksize: int = 0  # arvlimit, ailimit, etc
     export: str = ""  # Special:Export page name

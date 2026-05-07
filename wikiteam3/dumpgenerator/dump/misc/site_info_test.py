@@ -1,12 +1,11 @@
 import json
+from collections.abc import Generator
+from typing import Any, Optional
 
 import requests
 
-from wikiteam3.dumpgenerator.test.test_config import get_config
 from wikiteam3.dumpgenerator.config import Config
-
-from typing import Any, Optional
-from collections.abc import Generator
+from wikiteam3.dumpgenerator.test.test_config import get_config
 
 from .site_info import saveSiteInfo
 

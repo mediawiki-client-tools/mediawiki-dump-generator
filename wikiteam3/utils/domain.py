@@ -1,8 +1,8 @@
 import re
 
-from wikiteam3.dumpgenerator.config import Config
-
 import requests
+
+from wikiteam3.dumpgenerator.config import Config
 
 
 def domain2prefix(config: Config, session: requests.Session):

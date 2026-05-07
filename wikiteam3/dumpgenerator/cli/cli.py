@@ -254,7 +254,7 @@ def getParameters(params=None) -> Tuple[Config, Dict]:
                         try:
                             # drain conn in advance so that it won't be put back into conn.pool
                             kwargs["response"].drain_conn()
-                        except:
+                        except Exception as e:
                             pass
                     # Useless, retry happens inside urllib3
                     # for adapters in session.adapters.values():
@@ -267,7 +267,7 @@ def getParameters(params=None) -> Tuple[Config, Dict]:
                         try:
                             # Don't directly use this, This closes connection pool by making conn.pool = None
                             conn.close()
-                        except:
+                        except Exception as e:
                             pass
                         conn.pool = pool
                 return super().increment(method=method, url=url, *args, **kwargs)
@@ -298,7 +298,7 @@ def getParameters(params=None) -> Tuple[Config, Dict]:
         )
         session.mount("https://", HTTPAdapter(max_retries=__retries__))
         session.mount("http://", HTTPAdapter(max_retries=__retries__))
-    except:
+    except Exception as e:
         # Our urllib3/requests is too old
         pass
 

@@ -1,9 +1,9 @@
 import re
 import sys
 import time
+from typing import Dict, Optional
 
 import requests
-from typing import Dict, Optional
 
 from wikiteam3.dumpgenerator.api import handleStatusCode
 from wikiteam3.dumpgenerator.config import Config

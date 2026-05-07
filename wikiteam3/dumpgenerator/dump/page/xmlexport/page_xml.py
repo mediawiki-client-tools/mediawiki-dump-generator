@@ -1,9 +1,9 @@
+import requests
+
 from wikiteam3.dumpgenerator.config import Config
 
 from .page_xml_api import getXMLPageWithApi
 from .page_xml_export import getXMLPageWithExport
-
-import requests
 
 
 def getXMLPage(config: Config, title: str, verbose: bool, session: requests.Session):

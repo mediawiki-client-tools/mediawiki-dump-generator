@@ -1,4 +1,5 @@
 import os
+
 import requests
 
 from wikiteam3.dumpgenerator.cli import Delay

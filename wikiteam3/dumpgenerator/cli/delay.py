@@ -1,9 +1,8 @@
 import threading
 import time
+from typing import Optional
 
 from wikiteam3.dumpgenerator.config import Config
-
-from typing import Optional
 
 
 class Delay:

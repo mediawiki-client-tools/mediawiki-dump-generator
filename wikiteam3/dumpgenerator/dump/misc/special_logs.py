@@ -1,7 +1,7 @@
+import requests
+
 from wikiteam3.dumpgenerator.cli import Delay
 from wikiteam3.dumpgenerator.config import Config
-
-import requests
 
 
 def saveLogs(config: Config, session: requests.Session):

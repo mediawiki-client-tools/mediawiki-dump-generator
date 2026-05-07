@@ -1,8 +1,11 @@
 import re
+from typing import List
 from urllib.parse import urlparse
 
 import mwclient
+import requests
 from file_read_backwards import FileReadBackwards
+from mwclient.page import Page
 
 from wikiteam3.dumpgenerator.api.namespaces import (
     getNamespacesAPI,
@@ -12,9 +15,6 @@ from wikiteam3.dumpgenerator.cli import Delay
 from wikiteam3.dumpgenerator.config import Config
 from wikiteam3.utils import cleanHTML, domain2prefix, undoHTMLEntities
 from wikiteam3.utils.monkey_patch import DelaySession
-
-import requests
-from typing import List
 
 
 def getPageTitlesAPI(config: Config, session: requests.Session):
@@ -42,11 +42,12 @@ def getPageTitlesAPI(config: Config, session: requests.Session):
             scheme=apiurl.scheme,
             pool=session,
         )
-        if type(namespace) is int:
-            for page in site.allpages(namespace="%d" % namespace):
-                title = page.name
-                titles.append(title)
-                yield title
+        for page in [
+            i for i in site.allpages(namespace="%d" % namespace) if type(i) is Page
+        ]:
+            title = page.name
+            titles.append(title)
+            yield title
 
         if len(titles) != len(set(titles)):
             print("Probably a loop, switching to next namespace")
@@ -171,11 +172,11 @@ def getPageTitles(config: Config, session: requests.Session):
 
     titles = []
     if config.api:
-        # try:
-        titles = getPageTitlesAPI(config=config, session=session)
-        # except:
-        #     print("Error: could not get page titles from the API")
-        #     titles = getPageTitlesScraper(config=config, session=session)
+        try:
+            titles = getPageTitlesAPI(config=config, session=session)
+        except Exception as e:
+            print("Error: could not get page titles from the API")
+            titles = getPageTitlesScraper(config=config, session=session)
     elif config.index:
         titles = getPageTitlesScraper(config=config, session=session)
 
@@ -211,7 +212,7 @@ def checkTitleOk(config: Config, session: requests.Session):
             lasttitle = frb.readline().strip()
             if lasttitle == "":
                 lasttitle = frb.readline().strip()
-    except:
+    except Exception as e:
         lasttitle = ""  # probably file does not exists
 
     return lasttitle == "--END--"

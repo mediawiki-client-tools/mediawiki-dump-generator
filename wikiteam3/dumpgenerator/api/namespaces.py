@@ -1,10 +1,16 @@
 import re
-import requests
 from typing import List
+
+import requests
 
 from wikiteam3.dumpgenerator.api import getJSON
 from wikiteam3.dumpgenerator.cli import Delay
 from wikiteam3.dumpgenerator.config import Config
+
+
+class Namespace:
+    number: int
+    name: str
 
 
 def getNamespacesScraper(config: Config, session: requests.Session):
@@ -69,7 +75,8 @@ def getNamespacesAPI(config: Config, session: requests.Session):
             print("Error: could not get namespaces from the API request.")
             print("HTTP %d" % r.status_code)
             print(r.text)
-            return None
+            namespaces = [0]
+            return namespaces, namespacenames
 
         if "all" in namespaces:
             namespaces = []

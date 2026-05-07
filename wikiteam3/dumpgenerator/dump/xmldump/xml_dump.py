@@ -1,9 +1,10 @@
 import re
-from re import Match
 import sys
 from io import TextIOWrapper
+from re import Match
 
 import lxml.etree
+import requests
 
 from wikiteam3.dumpgenerator.api.page_titles import readTitles
 from wikiteam3.dumpgenerator.cli import Delay
@@ -18,8 +19,6 @@ from wikiteam3.dumpgenerator.dump.xmldump.xml_truncate import (
 from wikiteam3.dumpgenerator.exceptions import PageMissingError
 from wikiteam3.dumpgenerator.log import logerror
 from wikiteam3.utils import cleanXML, domain2prefix, undoHTMLEntities
-
-import requests
 
 
 def doXMLRevisionDump(

@@ -59,7 +59,7 @@ def makeXmlFromPage(page: dict, arvcontinue) -> str:
                         **{
                             "bytes": str(size),
                             "{http://www.w3.org/XML/1998/namespace}space": "preserve",
-                        }
+                        },
                     )
                 )
 

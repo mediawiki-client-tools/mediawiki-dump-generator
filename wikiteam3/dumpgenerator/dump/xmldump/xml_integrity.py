@@ -1,7 +1,8 @@
 from typing import Iterable
-from wikiteam3.dumpgenerator.config import Config
 
 import requests
+
+from wikiteam3.dumpgenerator.config import Config
 
 
 def checkXMLIntegrity(config: Config, titles: Iterable[str], session: requests.Session):

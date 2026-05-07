@@ -1,9 +1,9 @@
 import json
 import re
 import sys
+from typing import Tuple
 
 import requests
-from typing import Tuple
 
 from wikiteam3.dumpgenerator.config import Config
 from wikiteam3.dumpgenerator.dump.page.xmlexport.page_xml import getXMLPage

@@ -23,6 +23,7 @@ def reconstructRevisions(root: ET.Element):
     page = ET.Element("stub")
     edits = 0
     query = root.find("query")
+    rev_findall: list[ET.Element] = list()
     if query:
         pages = query.find("pages")
     if pages:
@@ -89,8 +90,8 @@ def reconstructRevisions(root: ET.Element):
             # logerror(config=config, text='Error reconstructing revision, xml:%s' % (ET.tostring(rev)))
             print(ET.tostring(rev))
             traceback.print_exc()
-            page = None
-            edits = 0
+            # page = None
+            # edits = 0
             raise e
     return page, edits
 
@@ -190,7 +191,7 @@ def getXMLPageWithApi(
                         lastcontinue = params[continueKey]
                     else:
                         lastcontinue = None
-                except:
+                except Exception as e:
                     lastcontinue = None
 
             xml = getXMLPageCoreWithApi(params=params, config=config, session=session)
@@ -199,7 +200,7 @@ def getXMLPageWithApi(
                 return
             try:
                 root = ET.fromstring(xml.encode("utf-8"))
-            except:
+            except Exception as e:
                 continue
             try:
                 query = root.find("query")
@@ -207,7 +208,7 @@ def getXMLPageWithApi(
                     pages = query.find("pages")
                 if pages:
                     retpage = pages.find("page")
-            except:
+            except Exception as e:
                 continue
             if retpage and ("missing" in retpage.attrib or "invalid" in retpage.attrib):
                 print("Page not found")
@@ -219,7 +220,7 @@ def getXMLPageWithApi(
                     ret += "    <title>%s</title>\n" % (retpage.attrib["title"])
                     ret += "    <ns>%s</ns>\n" % (retpage.attrib["ns"])
                     ret += "    <id>%s</id>\n" % (retpage.attrib["pageid"])
-                except:
+                except Exception as e:
                     firstpartok = False
                     continue
                 else:
@@ -274,7 +275,7 @@ def getXMLPageWithApi(
                 numberofedits += edits
                 if config.curonly or continueVal is None:  # no continue
                     break
-            except:
+            except Exception as e:
                 traceback.print_exc()
                 params["rvcontinue"] = lastcontinue
                 ret = ""

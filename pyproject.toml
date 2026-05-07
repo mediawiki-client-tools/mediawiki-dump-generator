@@ -11,9 +11,6 @@ maintainers = [
     { name = "Elsie Hupp", email = "github@elsiehupp.com" }
 ]
 readme = "README.md"
-homepage = "https://wiki.archiveteam.org/index.php/WikiTeam"
-repository = "https://github.com/WikiTeam/wikiteam"
-documentation = "https://wikiteam.readthedocs.io"
 keywords = [
     "archiveteam",
     "mediawiki",
@@ -41,15 +38,36 @@ classifiers = [
     "Topic :: System :: Archiving :: Backup",
     "Topic :: Utilities"
 ]
-packages = [
-    { include = "wikiteam3/**/*"},
+# packages = [
+#     { include = "wikiteam3/**/*"},
+# ]
+# exclude = ["wikiteam3/dumpgenerator/test/*"]
+
+dependencies = [
+    "requests >= 2.32.3",
+    "internetarchive >= 5.5.1",
+    "lxml >= 6.1.0",
+    "mwclient >= 0.10.1",
+    "PyMySQL >= 1.1.1",
+    "pywikibot >= 11.0.0",
+    "urllib3 >= 2.6.3",
+    "wikitools3 >= 3.0.0",
+    "pymysql",
+    "file_read_backwards >= 2.0.0",
+    "pre-commit-poetry-export >= 0.1.2",
+    "setuptools >= 82.0.0"
 ]
-exclude = ["wikiteam3/dumpgenerator/test/*"]
+requires-python = ">=3.10,<4"
 
-# [tool.mypy]
-# follow_untyped_imports = true
+[project.urls]
+# Homepage = "https://wiki.archiveteam.org/index.php/WikiTeam"
+Repository = "https://github.com/mediawiki-client-tools/mediawiki-dump-generator"
+# Documentation = "https://wikiteam.readthedocs.io"
 
-[tool.poetry.scripts]
+[tool.mypy]
+follow_untyped_imports = true
+
+[project.scripts]
 dumpgenerator = "wikiteam3.dumpgenerator:main"
 # gui = "wikiteam3.gui:main"
 launcher = "wikiteam3.launcher:main"
@@ -58,21 +76,6 @@ uploader = "wikiteam3.uploader:main"
 # wikiadownloader = "wikiteam3.wikiadownloader:main"
 # wikipediadownloader = "wikiteam3.wikipediadownloader:main"
 # wikispaces = "wikiteam3.wikispaces:main"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-requests = "^2.32.0"
-internetarchive = "^5.5.1"
-lxml = "^6.1.0"
-mwclient = "^0.10.1"
-PyMySQL = "^1.1.1"
-pywikibot = "^11.0.0"
-urllib3 = "^2.6.3"
-wikitools3 = "^3.0.0"
-pymysql = "*"
-file_read_backwards = "^2.0.0"
-pre-commit-poetry-export = "^0.1.2"
-setuptools = "^82.0.0"
 
 [tool.isort]
 profile = "black"
@@ -85,9 +88,10 @@ pre-commit = "^2.17.0"
 pymarkdown = "^0.1.4"
 setuptools = "^82.0.0"
 black = "^26.3.1"
-# mypy = "^1.20.2"
-# types-requests = "^2.33.0.20260408"
-# lxml-stubs = "^0.5.1"
+isort = "^8.0.1"
+mypy = "^1.20.2"
+types-requests = "^2.33.0.20260408"
+lxml-stubs = "^0.5.1"
 
 [tool.poetry.requires-plugins]
 poetry-plugin-export = ">=1.8"

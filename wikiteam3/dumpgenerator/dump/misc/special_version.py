@@ -1,10 +1,10 @@
 import os
 
+import requests
+
 from wikiteam3.dumpgenerator.cli import Delay
 from wikiteam3.dumpgenerator.config import Config
 from wikiteam3.utils import removeIP
-
-import requests
 
 
 def saveSpecialVersion(config: Config, session: requests.Session):
