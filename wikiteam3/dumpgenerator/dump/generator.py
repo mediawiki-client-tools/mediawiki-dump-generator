@@ -127,7 +127,7 @@ class DumpGenerator:
         print("Trying generating a new dump into a new directory...")
         if config.xml:
             generateXMLDump(config=config, resume=False, session=other["session"])
-            # checkXMLIntegrity(config=config, titles=None, session=other["session"])
+            checkXMLIntegrity(config=config, titles=[], session=other["session"])
         if config.images:
             images += Image.getImageNames(config=config, session=other["session"])
             Image.saveImageNames(config=config, images=images, session=other["session"])
@@ -175,7 +175,7 @@ class DumpGenerator:
 
             if xmliscomplete:
                 print("XML dump was completed in the previous session")
-            elif lastxmltitle and other:
+            elif lastxmltitle:
                 # resuming...
                 print(
                     f'Resuming XML dump from "{lastxmltitle}" (revision id {lastxmlrevid})'

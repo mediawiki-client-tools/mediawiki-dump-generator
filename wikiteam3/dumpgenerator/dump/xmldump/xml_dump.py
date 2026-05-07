@@ -81,7 +81,9 @@ def doXMLExportDump(
         lock = False
 
     c = 1
-    for title in readTitles(config, session=session, start=start):
+    for title in (
+        i for i in readTitles(config, session=session, start=start) if type(i) is str
+    ):
         if not title:
             continue
         if title == start:  # start downloading from start, included
@@ -92,12 +94,11 @@ def doXMLExportDump(
         if c % 10 == 0:
             print(f"\n->  Downloaded {c} pages\n")
         try:
-            if type(title) is str:
-                for xml in getXMLPage(
-                    config=config, title=title, verbose=True, session=session
-                ):
-                    xml = cleanXML(xml=xml)
-                    xmlfile.write(xml)
+            for xml in getXMLPage(
+                config=config, title=title, verbose=True, session=session
+            ):
+                xml = cleanXML(xml=xml)
+                xmlfile.write(xml)
         except PageMissingError:
             logerror(
                 config=config,
