@@ -84,8 +84,6 @@ def doXMLExportDump(
     for title in (
         i for i in readTitles(config, session=session, start=start) if type(i) is str
     ):
-        if not title:
-            continue
         if title == start:  # start downloading from start, included
             lock = False
         if lock:
