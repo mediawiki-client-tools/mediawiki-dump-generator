@@ -11,7 +11,7 @@ from wikiteam3.dumpgenerator.config import Config
 def saveSiteInfo(config: Config, session: requests.Session):
     """Save a file with site info"""
 
-    if not config or type(config) is not Config or (config and not config.api):
+    if type(config) is not Config or (config and not config.api):
         return
     if os.path.exists(f"{config.path}/siteinfo.json"):
         print("siteinfo.json exists, do not overwrite")
