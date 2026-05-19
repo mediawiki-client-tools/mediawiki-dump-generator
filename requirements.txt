@@ -137,9 +137,9 @@ colorama==0.4.6 ; python_version >= "3.13" and python_version < "4" and platform
 file-read-backwards==3.2.0 ; python_version >= "3.13" and python_version < "4" \
     --hash=sha256:15b261b3b65cd1452f5a66fad3e81e3fd15b1ba2c0e3a224ef0ba0f6392ec1a9 \
     --hash=sha256:5478d305ebaeaae8fe3c6585a24dfc3262170224450acc9321398f0d26cdd109
-idna==3.13 ; python_version >= "3.13" and python_version < "4" \
-    --hash=sha256:585ea8fe5d69b9181ec1afba340451fba6ba764af97026f92a91d4eef164a242 \
-    --hash=sha256:892ea0cde124a99ce773decba204c5552b69c3c67ffd5f232eb7696135bc8bb3
+idna==3.15 ; python_version >= "3.13" and python_version < "4" \
+    --hash=sha256:048adeaf8c2d788c40fee287673ccaa74c24ffd8dcf09ffa555a2fbb59f10ac8 \
+    --hash=sha256:ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc
 internetarchive==5.8.0 ; python_version >= "3.13" and python_version < "4" \
     --hash=sha256:0dff14d51bafa3da587f32a8cb6478327e20c2d040a61fbfb4ad30d592062cc2 \
     --hash=sha256:2f86eed71e11ad0c8f7ac3a339a2e0d0ee8316151be1257950df5e472ff62d8b
