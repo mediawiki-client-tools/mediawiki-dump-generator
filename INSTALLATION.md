@@ -83,6 +83,47 @@
 
   </details>
 
+* Docker Container Example
+
+  <details>
+  <summary>Container</summary>
+
+  ```Dockerfile
+  FROM python:3.12-bookworm
+  
+  RUN apt update && \
+    apt install -y --no-install-recommends git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir /app
+
+  WORKDIR /app
+
+  # install it
+  RUN git clone https://github.com/mediawiki-client-tools/mediawiki-dump-generator --depth 1 && \
+    pip install --no-cache-dir poetry && \
+    cd mediawiki-dump-generator && \
+    poetry update && poetry install && poetry build && \
+    pip install --no-cache-dir --force-reinstall dist/*.whl
+
+  # test it
+  RUN dumpgenerator --help
+  ```
+
+  Build it:
+  ```bash
+   docker build -f Dockerfile -t wiki-dl --network=host .
+  ```
+
+  Run it:
+  ```bash
+  docker run --rm -it --network=host --volume /tmp/wiki-dl:/tmp --name wiki-dl wiki-dl /bin/bash
+  ```
+
+  You can copy the dumps to `/tmp` to pass it to your host-system.
+
+  </details>
+
 ## Downloading and installing dumpgenerator
 
 The Python 3 port of the `dumpgenerator` module of `wikiteam3` is largely functional and can be installed from a downloaded or cloned copy of this repository.
@@ -106,6 +147,7 @@ cd mediawiki-dump-generator
 ```
 
 ```bash
+pip install poetry
 poetry update && poetry install && poetry build
 ```
 
